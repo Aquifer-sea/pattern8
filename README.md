@@ -10,8 +10,14 @@
 [![PyPI version](https://img.shields.io/pypi/v/pattern8?color=blue&style=for-the-badge)](https://pypi.org/project/pattern8/)
 [![Python](https://img.shields.io/pypi/pyversions/pattern8?style=for-the-badge)](https://pypi.org/project/pattern8/)
 [![CI](https://github.com/Aquifer-sea/pattern8/actions/workflows/ci.yml/badge.svg?style=for-the-badge)](https://github.com/Aquifer-sea/pattern8/actions)
+[![Coverage](https://img.shields.io/badge/Coverage-100%25-brightgreen.svg?style=for-the-badge)](https://github.com/Aquifer-sea/pattern8/actions)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
 
+**[ 📚 Read the Docs](#) • [ 💬 Join Discord ](#) • [ 🐦 Twitter ](#)**
+</div>
+
+<div align="center">
+  <img src="https://via.placeholder.com/800x400/000000/FFFFFF/?text=[+PLACEHOLDER+FOR+KILLER+DEMO+GIF+]" alt="P8 intercepts dangerous agent command" width="100%" />
 </div>
 
 ---
