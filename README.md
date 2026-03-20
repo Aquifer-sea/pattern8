@@ -1,9 +1,42 @@
 # Pattern 8 (P8)
 
+[![PyPI version](https://img.shields.io/pypi/v/pattern8?color=blue)](https://pypi.org/project/pattern8/)
+[![Python](https://img.shields.io/pypi/pyversions/pattern8)](https://pypi.org/project/pattern8/)
+[![CI](https://github.com/Aquifer-sea/pattern8/actions/workflows/ci.yml/badge.svg)](https://github.com/Aquifer-sea/pattern8/actions)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
+[![Downloads](https://img.shields.io/pypi/dm/pattern8)](https://pypi.org/project/pattern8/)
+
 > 🎱 AI Agent Governance Framework
 
 P8 constrains how AI Agents (Claude, Cursor, Gemini, etc.) behave in your project.
 **Law (SKILL files) + Police (code engine) + Zero-Trust (Hook + Rules) = Agents can't jailbreak.**
+
+## Demo
+
+```console
+$ pip install pattern8
+Successfully installed pattern8-0.2.2
+
+$ mkdir my-project && cd my-project && git init
+Initialized empty Git repository
+
+$ p8 init
+✅ Created AGENTS.md
+✅ Created skills/ (5 SKILLs: example, code_review, bug_fix, refactor, feature_dev)
+✅ Installed pre-commit hook
+✅ Created .cursor/rules/p8-enforcement.mdc
+
+$ p8 list
+  example       — PRD document generation
+  code_review   — Code review enforcement
+  bug_fix       — Bug fix process enforcement
+  feature_dev   — Feature development enforcement
+  refactor      — Refactoring enforcement
+  Total: 5 SKILLs
+
+$ p8 validate skills/code_review
+✅ All checks passed: SKILL.md, checklist.yaml, template.yaml, guidelines.yaml, security.yaml
+```
 
 ---
 
