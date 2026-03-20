@@ -1,272 +1,137 @@
+<div align="center">
+
 # Pattern 8 (P8)
 
-[![PyPI version](https://img.shields.io/pypi/v/pattern8?color=blue)](https://pypi.org/project/pattern8/)
-[![Python](https://img.shields.io/pypi/pyversions/pattern8)](https://pypi.org/project/pattern8/)
-[![CI](https://github.com/Aquifer-sea/pattern8/actions/workflows/ci.yml/badge.svg)](https://github.com/Aquifer-sea/pattern8/actions)
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
-[![Downloads](https://img.shields.io/pypi/dm/pattern8)](https://pypi.org/project/pattern8/)
+**Zero-Trust Governance Framework to stop AI Agents from hallucinating, breaking things, and bypassing your rules.**
+<br/>
 
-> 🎱 AI Agent Governance Framework
+> *"Your prompt is merely a suggestion. P8 is the law."*
 
-P8 constrains how AI Agents (Claude, Cursor, Gemini, etc.) behave in your project.
-**Law (SKILL files) + Police (code engine) + Zero-Trust (Hook + Rules) = Agents can't jailbreak.**
+[![PyPI version](https://img.shields.io/pypi/v/pattern8?color=blue&style=for-the-badge)](https://pypi.org/project/pattern8/)
+[![Python](https://img.shields.io/pypi/pyversions/pattern8?style=for-the-badge)](https://pypi.org/project/pattern8/)
+[![CI](https://github.com/Aquifer-sea/pattern8/actions/workflows/ci.yml/badge.svg?style=for-the-badge)](https://github.com/Aquifer-sea/pattern8/actions)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
 
-## Demo
-
-```console
-$ pip install pattern8
-Successfully installed pattern8-0.2.2
-
-$ mkdir my-project && cd my-project && git init
-Initialized empty Git repository
-
-$ p8 init
-✅ Created AGENTS.md
-✅ Created skills/ (5 SKILLs: prd, code_review, bug_fix, refactor, feature_dev)
-✅ Installed pre-commit hook
-✅ Created .cursor/rules/p8-enforcement.mdc
-
-$ p8 list
-  prd           — PRD document generation
-  code_review   — Code review enforcement
-  bug_fix       — Bug fix process enforcement
-  feature_dev   — Feature development enforcement
-  refactor      — Refactoring enforcement
-  Total: 5 SKILLs
-
-$ p8 validate skills/code_review
-✅ All checks passed: SKILL.md, checklist.yaml, template.yaml, guidelines.yaml, security.yaml
-```
+</div>
 
 ---
 
-## Installation
+## The Chaos vs. The Law
+
+Are you tired of AI coding agents (Claude, Cursor, Devin) ignoring your instructions, deleting the wrong files, or pushing code without tests? 
+
+Prompts are not enough. **Prompt injection defence is impossible.** To truly control an agent, constraints must be enforced at the OS and code level.
+
+### ❌ Without P8 (The Chaos)
+- **Agent decides** to skip writing tests because it's "too trivial".
+- **Agent runs** `rm -rf` by mistake during a multi-step refactor.
+- **Agent outputs** a feature without ever writing a design doc.
+- **Agent ignores** your 5,000-word system prompt because its context window is full.
+
+### 🛡️ With P8 (The Law)
+- **MCP SecurityGuard** intercepts and blocks dangerous commands at the OS level.
+- **MCP Reviewer** forces the agent into a strict retry-loop if output doesn't match the `template.yaml`.
+- **Pre-commit Hooks** ensure the agent hasn't tampered with the rules themselves.
+- **Inversion Pattern** forces the agent to stop and ask you clarifying questions instead of hallucinating.
+
+---
+
+## ⚡ Zero to Hero in 30 Seconds
+
+Take absolute control of your codebase with 3 commands:
 
 ```bash
+# 1. Install the enforcer (Python 3.8+)
 pip install pattern8
-```
 
-## Quick Start (3 commands)
-
-```bash
-# 1. Create a project and initialize P8
-mkdir my-project && cd my-project
-git init
+# 2. Add handcuffs to your current project
 p8 init
 
-# 2. View installed SKILLs
+# 3. Done. Your Agents are now under control.
 p8 list
-
-# 3. Validate SKILL integrity
-p8 validate skills/code_review
-```
-
-After running `p8 init`, your project will have:
-
-```
-my-project/
-├── AGENTS.md                          # Global rules all Agents must follow
-├── skills/                            # 5 built-in governance SKILLs
-│   ├── prd/                           # PRD document generation
-│   ├── code_review/                   # Code review enforcement
-│   ├── bug_fix/                       # Bug fix process enforcement
-│   ├── feature_dev/                   # Feature development enforcement
-│   └── refactor/                      # Refactoring enforcement
-├── .cursor/rules/p8-enforcement.mdc   # Forces Cursor Agent to use MCP
-└── .git/hooks/pre-commit              # Audits every commit automatically
 ```
 
 ---
 
-## How It Works
+## 🚔 How It Works: Law vs. Police
 
-P8 separates **Law** (editable SKILL files) from **Police** (read-only Python engine):
+P8 separates **Law** (editable rules) from **Police** (read-only execution engine):
 
-```
+```text
 Developer-editable (Law)              Read-only Engine (Police)
 ┌──────────────────────┐          ┌──────────────────────────┐
 │ SKILL.md             │          │ SecurityGuard            │
 │ checklist.yaml       │  read →  │  ↳ regex blacklist       │
-│ template.yaml        │          │  ↳ path restrictions     │
-│ guidelines.yaml      │          │ Reviewer                 │
-│ security.yaml        │          │  ↳ static rule engine    │
+│ template.yaml        │          │  ↳ OS command hooks      │
+│ guidelines.yaml  🔒  │          │ Reviewer                 │
+│ security.yaml    🔒  │          │  ↳ static rule engine    │
 │                      │          │  ↳ P8AuditError rollback │
-│ "Constitution"       │          │ "Police"                 │
+│ "The Constitution"   │          │ "The Police"             │
 └──────────────────────┘          └──────────────────────────┘
                 ↕ Agent calls via MCP ↕
 ```
 
-You edit the **Law** files to define constraints. The **Police** engine enforces them automatically.
+You write the **Law** in simple Markdown and YAML. The **Police** engine enforces them automatically via MCP (Model Context Protocol). Files marked with 🔒 are deliberately hidden from the Agent so it cannot read the security parameters used to audit it.
 
 ---
 
-## File-by-File Guide
+## 💎 The 5 Golden SKILLs
 
-### Files in Your Project Root
+P8 comes with 5 industrial-grade developer SKILLs out of the box. *Don't just code. Engineer.*
 
-| File | What It Does | Who Edits It |
-|------|-------------|:------------:|
-| `AGENTS.md` | Global instructions every AI Agent must read before starting any task. Defines the 5 Patterns and security red lines. | You |
-| `.cursor/rules/p8-enforcement.mdc` | Forces Cursor IDE Agent to call MCP tools for security checks. Without this, Agent can ignore rules. | Rarely |
-| `.git/hooks/pre-commit` | Runs automatically on every `git commit`. Checks that SKILL files haven't been tampered with. | Never |
+### 📝 PRD (`skills/prd/`)
+*Don't just build. Think first.* 
+Forces the agent to gather requirements and generate a structured Product Requirements Document before writing a single line of logic.
 
-### Files Inside Each SKILL
+### 🐛 Bug Fix (`skills/bug_fix/`)
+*Find the root cause, or don't fix it at all.* 
+Forces the agent through a strict 4-step golden path: Reproduce → Root Cause Analysis → Fix → Regression Test. 
 
-Every SKILL (e.g. `skills/code_review/`) has 5 files:
+### 🔒 Code Review (`skills/code_review/`)
+*Never merge unreviewed AI slop.* 
+The agent must submit its changes to the `Reviewer` engine. If the code fails security, performance, or correctness guidelines, the engine throws a `P8_AUDIT_FAILED` error, forcing the agent to retry and fix its own mess (up to 3 times) before presenting it to you.
 
-```
-skills/code_review/
-├── SKILL.md                    ← Pipeline definition
-├── assets/
-│   ├── checklist.yaml          ← Entry requirements
-│   └── template.yaml           ← Output format
-└── references/
-    ├── guidelines.yaml         ← Audit rules (🔒 invisible to Agent)
-    └── security.yaml           ← Security red lines (🔒 invisible to Agent)
-```
+### 🏗️ Refactor (`skills/refactor/`)
+*Change structure, not behavior.* 
+Forces the agent to guarantee functional equivalence test-passes after moving code around.
 
-#### `SKILL.md` — Pipeline Definition
-
-Defines the step-by-step process the Agent must follow. Contains:
-- **`<PIPELINE>`** — Ordered steps (Agent cannot skip any)
-- **`<HARD-GATE>`** — Blocking conditions (Agent must stop and ask if info is missing)
-
-```markdown
-## Step 1: Inversion — Check checklist.yaml, block if incomplete
-## Step 2: Generator — Output in template.yaml format
-## Step 3: Tool Wrapper — Check security.yaml before any tool call
-## Step 4: Reviewer — Self-audit against guidelines.yaml
-```
-
-#### `checklist.yaml` — Entry Requirements
-
-Agent must verify ALL items before starting. If any item is missing, Agent **stops and asks the user** instead of guessing.
-
-```yaml
-checklist:
-  - "Target file or module path provided"
-  - "Specific review focus described (security / performance / correctness)"
-  - "Context or recent changes explained"
-```
-
-#### `template.yaml` — Output Format
-
-Agent must output in exactly this structure. No freestyle.
-
-```yaml
-template: |
-  # Code Review Report
-  ## 1. Summary
-  ## 2. Issues Found
-  ## 3. Recommendations
-```
-
-#### `guidelines.yaml` — Audit Rules (🔒 Hidden from Agent)
-
-The Agent **cannot see** these rules. The engine loads them internally to audit the Agent's output. If the output doesn't meet these criteria, it gets rejected and the Agent must retry (up to 3 times).
-
-```yaml
-guidelines:
-  - "Every issue must have a specific line number"
-  - "Must include severity level (HIGH / MEDIUM / LOW)"
-  - "Must provide a concrete fix suggestion, not vague advice"
-```
-
-#### `security.yaml` — Security Red Lines (🔒 Hidden from Agent)
-
-Hard security constraints. The Agent **cannot see** these rules. The engine blocks any operation that violates them.
-
-```yaml
-security:
-  - "Never execute rm -rf, sudo, or curl|sh"
-  - "Never modify files outside the project directory"
-  - "Never commit credentials or API keys"
-```
+### 🚀 Feature Dev (`skills/feature_dev/`)
+*End-to-end delivery.*
+Requirements → Technical Design → Implementation → Unit Tests.
 
 ---
 
-## The 5 Patterns
-
-| # | Pattern | What It Does | Enforced By |
-|:-:|---------|-------------|-------------|
-| 1 | **Pipeline** | Agent must follow steps in order, no skipping | `SKILL.md` |
-| 2 | **Inversion** | Agent blocks and asks if required info is missing | `checklist.yaml` |
-| 3 | **Generator** | Agent outputs in strict template format | `template.yaml` |
-| 4 | **Tool Wrapper** | Dangerous commands are intercepted | `security.yaml` |
-| 5 | **Reviewer** | Agent self-audits, retries if non-compliant (up to 3×) | `guidelines.yaml` |
-
-## 5 Built-in SKILLs
-
-| SKILL | Use Case | What Agent Does |
-|-------|----------|----------------|
-| `prd` | PRD generation | Gathers requirements → generates structured PRD |
-| `code_review` | Code review | Reads code → finds issues → reports with line numbers |
-| `bug_fix` | Bug fixing | Reproduces → root cause → fix → regression test |
-| `refactor` | Refactoring | Analyzes → refactors → verifies functional equivalence |
-| `feature_dev` | Feature development | Requirements → design → implement → verify |
-
----
-
-## Three Defense Layers
-
-| Layer | Method | Can Agent Bypass? |
-|:-----:|--------|:-:|
-| 1 | `AGENTS.md` + Cursor Rules — prompt injection | ⚠️ Theoretically yes |
-| 2 | MCP Tools (`submit_review` / `execute_tool`) — code-level | ❌ No |
-| 3 | Git pre-commit hook — OS-level | ❌ Impossible |
-
----
-
-## CLI Commands
+## 🛠️ CLI Reference
 
 ```bash
-p8 init [target]                # Initialize P8 in a project
-p8 list                         # List all available SKILLs
-p8 validate <skill_path>        # Validate SKILL file integrity
-p8 new <skill_name>             # Create a new custom SKILL
-p8 serve                        # Start MCP enforcement server
-p8 mcp-config --client cursor   # Generate MCP config for Cursor
+p8 init [target]                # Initialize P8 and generate the 5 default SKILLs
+p8 list                         # List all available SKILLs in the current project
+p8 validate <skill_path>        # Validate SKILL file integrity (run after editing)
+p8 new <skill_name>             # Create a scaffold for a new custom SKILL
 ```
 
-## Create Your Own SKILL
+---
+
+## 🔌 Connect to Cursor / Windsurf / Claude Desktop
+
+To turn on the active "Police" enforcement engine, install the MCP extension:
 
 ```bash
-p8 new my_custom_skill
-```
-
-This generates a scaffold at `skills/my_custom_skill/` with all 5 files. Edit them to define your own Agent constraints.
-
-## Connect to Cursor (MCP)
-
-```bash
-# Full install with MCP server
+# Full install with MCP server support
 pip install 'pattern8[enforcement]'
 
-# Generate config
+# Generate MCP config for Cursor
 p8 mcp-config --client cursor
 ```
 
-Paste the output into `.cursor/mcp.json`:
-
-```json
-{
-  "mcpServers": {
-    "pattern8": {
-      "command": "p8",
-      "args": ["serve"]
-    }
-  }
-}
-```
-
-Now Cursor Agent will call `submit_review` and `execute_tool` through MCP, and the engine enforces security + audit automatically.
+Paste the output into `.cursor/mcp.json`. Now, every time the Cursor Agent tries to run a command or finish a task, it **must** pass through the P8 `execute_tool` and `submit_review` checkpoints. 
 
 ---
 
-## Contributing
+## 🤝 Contributing
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for development setup, project structure, and how to add new SKILLs.
+We welcome completely new SKILLs! See [CONTRIBUTING.md](CONTRIBUTING.md) for architectural details and how to open a PR.
 
-## License
+## 📄 License
 
 MIT
