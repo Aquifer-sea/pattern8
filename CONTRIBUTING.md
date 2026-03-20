@@ -5,8 +5,8 @@ Thank you for your interest in Pattern 8! Here's how to contribute.
 ## Development Setup
 
 ```bash
-git clone https://github.com/pattern8/p8.git
-cd p8
+git clone https://github.com/Aquifer-sea/pattern8.git
+cd pattern8
 python3.12 -m venv .venv
 source .venv/bin/activate  # Windows: .venv\Scripts\activate
 pip install -e ".[dev]"
