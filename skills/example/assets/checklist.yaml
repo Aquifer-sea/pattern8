@@ -1,0 +1,8 @@
+# Checklist — Required inputs before PRD generation
+# The Inversion node validates user input against these items.
+
+checklist:
+  - "Target audience or user persona is specified"
+  - "At least one core feature or capability is described"
+  - "Success criteria or key metrics are mentioned"
+  - "Platform or deployment context is indicated (web, mobile, API, etc.)"

@@ -1,0 +1,29 @@
+# Refactoring Output Template
+
+template: |
+  # Refactoring Report
+
+  ## 1. Refactoring Goal
+  [Why refactor? What problem to solve?]
+
+  ## 2. Impact Analysis
+  - **Files affected**: ...
+  - **Functions affected**: ...
+  - **Risk level**: LOW / MEDIUM / HIGH
+
+  ## 3. Refactoring Plan
+  | Step | Action | Rationale |
+  |------|--------|-----------|
+  | 1    | ...    | ...       |
+  | 2    | ...    | ...       |
+
+  ## 4. Refactored Code
+  ```diff
+  - [original]
+  + [refactored]
+  ```
+
+  ## 5. Behavioral Equivalence
+  - [ ] All existing tests pass
+  - [ ] Public API unchanged
+  - [ ] Input/output behavior identical

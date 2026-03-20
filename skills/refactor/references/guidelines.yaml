@@ -1,0 +1,31 @@
+# Refactoring Guidelines — Reviewer static engine checks each rule
+
+guidelines:
+  - "Refactored code must be functionally equivalent to the original"
+  - "Public API signatures must not change without explicit approval"
+  - "Each refactoring step must have a clear rationale"
+  - "Code complexity must decrease (measured by cyclomatic complexity)"
+  - "Diff must be reviewable — avoid mixing unrelated changes"
+  - "New code must follow existing naming conventions and patterns"
+
+rules:
+  - type: format_verify
+    rule: "Core sections"
+    format: markdown
+    headings:
+      - "Refactoring"
+
+  - type: regex_match
+    rule: "Contains diff"
+    pattern: "(diff|```|before|after)"
+    case_insensitive: true
+
+  - type: length_limit
+    rule: "Minimum length"
+    min_chars: 100
+    min_lines: 5
+
+  - type: regex_exclude
+    rule: "No placeholders"
+    pattern: "\\[TODO\\]|\\[placeholder\\]"
+    case_insensitive: true

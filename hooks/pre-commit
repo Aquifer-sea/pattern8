@@ -1,0 +1,62 @@
+#!/bin/bash
+# ════════════════════════════════════════════════════════════
+# P8 Git Pre-commit Hook — Auto audit on local commit
+#
+# Install:
+#   cp hooks/pre-commit .git/hooks/pre-commit
+#   chmod +x .git/hooks/pre-commit
+#
+# Or auto-install via: p8 init
+# ════════════════════════════════════════════════════════════
+
+set -e
+
+echo "🎱 P8 Pre-commit Audit"
+echo ""
+
+# Check if p8 is available
+if ! command -v p8 &> /dev/null; then
+    echo "⚠️  p8 not installed, skipping audit"
+    exit 0
+fi
+
+# Check if skills/ exists
+if [ ! -d "skills" ]; then
+    echo "⏭️  No skills/ directory, skipping"
+    exit 0
+fi
+
+ERRORS=0
+
+# Validate all SKILL integrity
+for skill_dir in skills/*/; do
+    if [ -f "${skill_dir}SKILL.md" ]; then
+        skill_name=$(basename "$skill_dir")
+        if ! p8 validate "$skill_dir" > /dev/null 2>&1; then
+            echo "❌ SKILL validation failed: $skill_name"
+            p8 validate "$skill_dir" 2>&1 | grep -E "❌|⚠️" || true
+            ERRORS=$((ERRORS + 1))
+        fi
+    fi
+done
+
+# Check staged files for security risks
+STAGED_FILES=$(git diff --cached --name-only --diff-filter=ACM 2>/dev/null || true)
+
+for file in $STAGED_FILES; do
+    # Check for hardcoded secrets
+    if grep -qiE "(api_key|secret_key|password|token)\s*=\s*['\"][^'\"]{8,}" "$file" 2>/dev/null; then
+        echo "❌ Possible hardcoded secret: $file"
+        ERRORS=$((ERRORS + 1))
+    fi
+done
+
+if [ $ERRORS -gt 0 ]; then
+    echo ""
+    echo "🚫 Commit blocked: $ERRORS issue(s)"
+    echo "   Fix issues and retry git commit"
+    exit 1
+fi
+
+echo "✅ P8 audit passed"
+echo ""

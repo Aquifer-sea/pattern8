@@ -1,0 +1,8 @@
+# Feature Dev Checklist
+
+checklist:
+  - "Feature requirements are clearly described with user stories"
+  - "Technology stack and framework are specified"
+  - "Acceptance criteria are defined"
+  - "Affected modules or components are identified"
+  - "Edge cases and error scenarios are considered"

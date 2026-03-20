@@ -1,0 +1,58 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "pattern8"
+version = "0.2.0"
+description = "Pattern 8 (P8) — AI Agent Governance Framework"
+readme = "README.md"
+requires-python = ">=3.11"
+license = {text = "MIT"}
+keywords = ["ai", "agent", "governance", "framework", "skills", "pattern8"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+# Core dependencies (SKILL file management)
+dependencies = [
+    "pyyaml>=6.0",
+    "python-frontmatter>=1.1.0",
+    "click>=8.0",
+]
+
+[project.optional-dependencies]
+# Enforcement module (MCP server)
+enforcement = [
+    "mcp[cli]>=1.0.0",
+]
+dev = [
+    "pytest>=8.0",
+]
+# Full install
+all = ["pattern8[enforcement,dev]"]
+
+# CLI entry point
+[project.scripts]
+p8 = "p8.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/pattern8/p8"
+Repository = "https://github.com/pattern8/p8"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/p8"]
+
+[tool.hatch.build.targets.wheel.force-include]
+"skills" = "p8/scaffold/skills"
+"hooks" = "p8/scaffold/hooks"
+"AGENTS.md" = "p8/scaffold/AGENTS.md"
+".cursor/rules/p8-enforcement.mdc" = "p8/scaffold/cursor-rules/p8-enforcement.mdc"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

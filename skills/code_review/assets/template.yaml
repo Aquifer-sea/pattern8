@@ -1,0 +1,37 @@
+# Code Review Output Template — Agent must follow this format
+
+template: |
+  # Code Review Report
+
+  ## 1. Summary
+  - **File**: [filename or scope]
+  - **Language**: [programming language]
+  - **Verdict**: ✅ PASS / ⚠️ NEEDS CHANGES / ❌ REJECT
+  - **Risk Level**: LOW / MEDIUM / HIGH / CRITICAL
+
+  ## 2. Correctness
+  | Issue | Line | Severity | Suggestion |
+  |-------|------|----------|------------|
+  | ...   | ...  | ...      | ...        |
+
+  ## 3. Security
+  | Vulnerability | Line | Severity | Fix |
+  |---------------|------|----------|-----|
+  | ...           | ...  | ...      | ... |
+
+  ## 4. Performance
+  | Bottleneck | Line | Impact | Optimization |
+  |------------|------|--------|-------------|
+  | ...        | ...  | ...    | ...         |
+
+  ## 5. Maintainability
+  - Code style: ...
+  - Naming conventions: ...
+  - Comment completeness: ...
+  - Test coverage: ...
+
+  ## 6. Suggested Changes
+  ```diff
+  - [original]
+  + [modified]
+  ```

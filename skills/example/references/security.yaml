@@ -1,0 +1,38 @@
+# Security Red Lines — Hard constraints that must NEVER be violated
+# Violating any rule triggers CRITICAL_FAIL — pipeline terminates immediately.
+
+security:
+  - "Must not include real user PII (names, emails, phone numbers) in examples"
+  - "Must not recommend disabling authentication or security features"
+  - "Must not suggest storing passwords in plain text"
+  - "Must not reference internal/confidential infrastructure details"
+  - "Must not include executable code snippets that could be exploited"
+
+# Tool Security Config — Security fences for the Tool Wrapper
+tool_security:
+  blacklist:
+    - "rm -rf *"
+    - "rm -r /"
+    - "mkfs*"
+    - "dd if=*"
+    - "chmod 777*"
+    - "curl * | sh"
+    - "wget * | sh"
+    - "eval *"
+    - "sudo *"
+    - "shutdown*"
+    - "reboot*"
+    - "> /dev/sda*"
+
+  allowed_paths:
+    - "./"
+
+  denied_paths:
+    - "/etc"
+    - "/root"
+    - "~/.ssh"
+    - "~/.aws"
+    - "/System"
+
+  write_protection: false
+  max_shell_timeout: 30

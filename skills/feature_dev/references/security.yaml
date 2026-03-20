@@ -1,0 +1,36 @@
+# Feature Dev Security Red Lines
+
+security:
+  - "Must not bypass authentication or authorization in new features"
+  - "Must not store sensitive data without encryption"
+  - "Must not expose internal endpoints or debug interfaces"
+  - "Must not introduce dependencies with known vulnerabilities"
+  - "Must not log sensitive information (passwords, tokens, PII)"
+
+tool_security:
+  blacklist:
+    - "rm -rf *"
+    - "rm -r /"
+    - "mkfs*"
+    - "dd if=*"
+    - "chmod 777*"
+    - "curl * | sh"
+    - "wget * | sh"
+    - "eval *"
+    - "sudo *"
+    - "shutdown*"
+    - "reboot*"
+    - "> /dev/sda*"
+
+  allowed_paths:
+    - "./"
+
+  denied_paths:
+    - "/etc"
+    - "/root"
+    - "~/.ssh"
+    - "~/.aws"
+    - "/System"
+
+  write_protection: false
+  max_shell_timeout: 30

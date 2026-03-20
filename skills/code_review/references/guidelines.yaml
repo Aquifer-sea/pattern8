@@ -1,0 +1,44 @@
+# Code Review Guidelines — Reviewer static engine checks each rule
+
+guidelines:
+  - "Every issue must have a specific line number or code reference"
+  - "Security vulnerabilities must be classified by OWASP Top 10"
+  - "Each suggestion must include a concrete code fix"
+  - "Review must cover all 4 dimensions: correctness, security, performance, maintainability"
+
+# Structured rules (static engine enforced)
+rules:
+  - type: format_verify
+    rule: "Four dimensions coverage"
+    format: markdown
+    headings:
+      - "Correctness"
+      - "Security"
+      - "Performance"
+      - "Maintainability"
+
+  - type: regex_match
+    rule: "Line number reference"
+    pattern: "(line|Line|L)\\s*\\d+"
+    case_insensitive: true
+
+  - type: regex_match
+    rule: "Severity classification"
+    pattern: "(CRITICAL|HIGH|MEDIUM|LOW)"
+    case_insensitive: false
+
+  - type: length_limit
+    rule: "Minimum length"
+    min_chars: 200
+    min_lines: 10
+
+  - type: contains
+    rule: "Suggested changes"
+    texts:
+      - "diff"
+    case_insensitive: true
+
+  - type: regex_exclude
+    rule: "No placeholders"
+    pattern: "\\[TODO\\]|\\[placeholder\\]"
+    case_insensitive: true

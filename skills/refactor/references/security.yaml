@@ -1,0 +1,35 @@
+# Refactoring Security Red Lines
+
+security:
+  - "Must not change public API behavior without explicit user approval"
+  - "Must not remove error handling or validation logic"
+  - "Must not introduce breaking changes to dependent modules"
+  - "Must not delete tests even if the code they test is refactored"
+
+tool_security:
+  blacklist:
+    - "rm -rf *"
+    - "rm -r /"
+    - "mkfs*"
+    - "dd if=*"
+    - "chmod 777*"
+    - "curl * | sh"
+    - "wget * | sh"
+    - "eval *"
+    - "sudo *"
+    - "shutdown*"
+    - "reboot*"
+    - "> /dev/sda*"
+
+  allowed_paths:
+    - "./"
+
+  denied_paths:
+    - "/etc"
+    - "/root"
+    - "~/.ssh"
+    - "~/.aws"
+    - "/System"
+
+  write_protection: false
+  max_shell_timeout: 30

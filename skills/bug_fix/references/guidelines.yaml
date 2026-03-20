@@ -1,0 +1,32 @@
+# Bug Fix Guidelines — Reviewer static engine checks each rule
+
+guidelines:
+  - "Root cause analysis must identify the actual cause, not just symptoms"
+  - "Fix must directly address the root cause, not just work around it"
+  - "Fix must not introduce new bugs or break existing functionality"
+  - "Diff must be minimal — only change what's necessary"
+  - "Edge cases must be considered and documented"
+  - "Impact analysis must identify all affected modules"
+
+rules:
+  - type: format_verify
+    rule: "Core sections coverage"
+    format: markdown
+    headings:
+      - "Root Cause"
+      - "Fix"
+
+  - type: regex_match
+    rule: "File path reference"
+    pattern: "[a-zA-Z_/]+\\.[a-zA-Z]{1,5}"
+    case_insensitive: false
+
+  - type: length_limit
+    rule: "Minimum length"
+    min_chars: 100
+    min_lines: 5
+
+  - type: regex_exclude
+    rule: "No placeholders"
+    pattern: "\\[TODO\\]|\\[placeholder\\]"
+    case_insensitive: true

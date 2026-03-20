@@ -1,0 +1,33 @@
+# Feature Dev Guidelines — Reviewer static engine checks each rule
+
+guidelines:
+  - "Implementation must match the acceptance criteria exactly"
+  - "All new functions must have corresponding unit tests"
+  - "Code must follow existing project conventions and patterns"
+  - "Error handling must cover all failure paths"
+  - "Changes must be backward compatible unless explicitly stated"
+  - "Public interfaces must have docstrings/comments"
+  - "No hardcoded values — use constants or configuration"
+
+rules:
+  - type: format_verify
+    rule: "Core sections"
+    format: markdown
+    headings:
+      - "Implementation"
+      - "Tests"
+
+  - type: regex_match
+    rule: "Contains code"
+    pattern: "```"
+    case_insensitive: false
+
+  - type: length_limit
+    rule: "Minimum length"
+    min_chars: 150
+    min_lines: 8
+
+  - type: regex_exclude
+    rule: "No placeholders"
+    pattern: "\\[TODO\\]|\\[placeholder\\]"
+    case_insensitive: true

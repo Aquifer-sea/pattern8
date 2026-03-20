@@ -1,0 +1,32 @@
+# Bug Fix Output Template
+
+template: |
+  # Bug Fix Report
+
+  ## 1. Issue Identification
+  - **File**: [file path]
+  - **Line**: [problematic line]
+  - **Error Type**: [type]
+  - **Severity**: LOW / MEDIUM / HIGH / CRITICAL
+
+  ## 2. Root Cause Analysis
+  [Why does this bug occur? What is the fundamental cause?]
+
+  ## 3. Fix Plan
+  [Describe the fix strategy in 1-2 sentences]
+
+  ## 4. Fix Code
+  ```diff
+  - [original]
+  + [fixed]
+  ```
+
+  ## 5. Impact Analysis
+  - Affects other modules: YES / NO
+  - Tests to update: ...
+  - Backward compatible: YES / NO
+
+  ## 6. Regression Verification
+  - [ ] Original bug is fixed
+  - [ ] Existing tests still pass
+  - [ ] Edge cases covered

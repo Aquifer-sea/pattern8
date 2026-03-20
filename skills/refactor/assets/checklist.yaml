@@ -1,0 +1,7 @@
+# Refactoring Checklist
+
+checklist:
+  - "Code to be refactored is provided with file path"
+  - "Refactoring goal is clearly stated (readability, performance, DRY, etc.)"
+  - "Invariant behaviors that must be preserved are identified"
+  - "Test coverage status is known (tests exist or need to be added)"

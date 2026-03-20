@@ -1,0 +1,36 @@
+# Bug Fix Security Red Lines
+
+security:
+  - "Must not disable error handling or exception catching as a fix"
+  - "Must not bypass authentication or authorization as a workaround"
+  - "Must not suppress or hide error logs"
+  - "Must not introduce hardcoded credentials in fixes"
+  - "Must not remove input validation as a fix"
+
+tool_security:
+  blacklist:
+    - "rm -rf *"
+    - "rm -r /"
+    - "mkfs*"
+    - "dd if=*"
+    - "chmod 777*"
+    - "curl * | sh"
+    - "wget * | sh"
+    - "eval *"
+    - "sudo *"
+    - "shutdown*"
+    - "reboot*"
+    - "> /dev/sda*"
+
+  allowed_paths:
+    - "./"
+
+  denied_paths:
+    - "/etc"
+    - "/root"
+    - "~/.ssh"
+    - "~/.aws"
+    - "/System"
+
+  write_protection: false
+  max_shell_timeout: 30

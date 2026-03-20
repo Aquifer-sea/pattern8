@@ -1,0 +1,38 @@
+# Guidelines — Audit criteria for Reviewer closed-loop evaluation
+# Each rule is checked against the generated output; violations trigger a rollback.
+
+guidelines:
+  - "Document must contain all 8 sections from the template"
+  - "Each feature must have a user story in 'As a... I want... So that...' format"
+  - "All features must have a priority level (P0, P1, or P2)"
+  - "Success metrics must be quantifiable with specific targets"
+  - "Timeline must include at least 2 milestones"
+  - "At least 2 risks must be identified with mitigations"
+  - "Non-functional requirements must address performance, security, and scalability"
+  - "Language must be professional, clear, and free of ambiguity"
+
+# Structured rules (static engine enforced)
+rules:
+  - type: format_verify
+    rule: "Eight sections coverage"
+    format: markdown
+    headings:
+      - "Overview"
+      - "Target Audience"
+      - "Problem Statement"
+      - "Core Features"
+
+  - type: regex_match
+    rule: "User story format"
+    pattern: "As a .+, I want .+ so that .+"
+    case_insensitive: true
+
+  - type: length_limit
+    rule: "Minimum length"
+    min_chars: 500
+    min_lines: 30
+
+  - type: regex_exclude
+    rule: "No placeholders"
+    pattern: "\\[TODO\\]|\\[placeholder\\]"
+    case_insensitive: true

@@ -1,0 +1,7 @@
+# Bug Fix Checklist — Agent must clarify these before starting
+
+checklist:
+  - "Error message or stack trace is provided"
+  - "Steps to reproduce the bug are described"
+  - "Expected behavior vs actual behavior is clear"
+  - "Affected file, module, or component is identified"

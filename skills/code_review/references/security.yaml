@@ -1,0 +1,36 @@
+# Code Review Security Red Lines
+
+security:
+  - "Must not approve code containing SQL injection vulnerabilities"
+  - "Must not approve code with hardcoded secrets or API keys"
+  - "Must not approve code that disables authentication or authorization"
+  - "Must not suggest fixes that introduce new security vulnerabilities"
+  - "Must not ignore eval(), exec(), or dynamic code execution patterns"
+
+tool_security:
+  blacklist:
+    - "rm -rf *"
+    - "rm -r /"
+    - "mkfs*"
+    - "dd if=*"
+    - "chmod 777*"
+    - "curl * | sh"
+    - "wget * | sh"
+    - "eval *"
+    - "sudo *"
+    - "shutdown*"
+    - "reboot*"
+    - "> /dev/sda*"
+
+  allowed_paths:
+    - "./"
+
+  denied_paths:
+    - "/etc"
+    - "/root"
+    - "~/.ssh"
+    - "~/.aws"
+    - "/System"
+
+  write_protection: false
+  max_shell_timeout: 30

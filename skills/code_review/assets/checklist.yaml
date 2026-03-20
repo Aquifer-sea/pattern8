@@ -1,0 +1,7 @@
+# Code Review Checklist — Info the Agent must confirm before starting
+
+checklist:
+  - "Code snippet or file path to review is provided"
+  - "Programming language and framework are identified"
+  - "Review scope is clear (full review, security only, performance only, etc.)"
+  - "Context about the code's purpose or feature is given"

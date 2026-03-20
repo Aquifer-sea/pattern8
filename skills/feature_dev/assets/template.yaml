@@ -1,0 +1,30 @@
+# Feature Dev Output Template
+
+template: |
+  # Feature Development Report
+
+  ## 1. Requirement Understanding
+  - **Feature**: [name]
+  - **User Story**: As a [user], I want [action] so that [benefit].
+  - **Acceptance Criteria**: ...
+
+  ## 2. Technical Design
+  - **Architecture**: ...
+  - **Data Model**: ...
+  - **API Design**: ...
+
+  ## 3. Implementation
+  ### [filename]
+  ```language
+  [code]
+  ```
+
+  ## 4. Tests
+  ```language
+  [test code]
+  ```
+
+  ## 5. Integration Notes
+  - Dependencies: ...
+  - Config changes: ...
+  - Migration steps: ...
