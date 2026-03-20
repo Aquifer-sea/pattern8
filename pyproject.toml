@@ -4,16 +4,19 @@ build-backend = "hatchling.build"
 
 [project]
 name = "pattern8"
-version = "0.2.0"
+version = "0.2.2"
 description = "Pattern 8 (P8) — AI Agent Governance Framework"
 readme = "README.md"
-requires-python = ">=3.11"
+requires-python = ">=3.8"
 license = {text = "MIT"}
 keywords = ["ai", "agent", "governance", "framework", "skills", "pattern8"]
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Developers",
     "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
