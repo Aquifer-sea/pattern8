@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "pattern8"
-version = "0.2.5"
+version = "0.2.6"
 description = "Pattern 8 (P8) — AI Agent Governance Framework"
 readme = "README.md"
 requires-python = ">=3.8"
