@@ -4,22 +4,21 @@ globs: ["**/*"]
 alwaysApply: true
 ---
 
-<!-- P8 强制执法规则 — 自动注入每次 Agent 对话 -->
-<!-- 英文 = Agent 执行的指令 / 中文注释 = 给开发者看的解释 -->
+<!-- P8 enforcement rules — automatically injected into every agent conversation -->
 
 # P8 Enforcement Rules
 
 You are working in a project governed by **Pattern 8 (P8)**. Follow these rules.
 
-## 1. SKILL Discovery <!-- 任务开始前，先找匹配的 SKILL -->
+## 1. SKILL Discovery
 
 Before starting any task, read MCP Resource `skill://index` to find a matching SKILL.
 If a SKILL matches, read its `checklist` and `template` Resources.
 If no SKILL matches, work normally without P8 constraints.
 
-<!-- 只有匹配到 SKILL 时才启动 P8 流水线，日常问答不受影响 -->
+<!-- Only activate P8 pipeline when a SKILL matches; normal Q&A is unaffected -->
 
-## 2. execute_tool — Before Running Commands <!-- 执行命令前必须过安全检查 -->
+## 2. execute_tool — Before Running Commands
 
 Before executing any OS command, call:
 ```
@@ -27,9 +26,9 @@ execute_tool({ command: "your command", skill: "matched_skill_name" })
 ```
 If it returns `allowed: false`, you MUST stop. Do NOT attempt to bypass.
 
-<!-- 这是 SecurityGuard 的安全围栏，拦截 rm -rf、sudo 等危险命令 -->
+<!-- SecurityGuard fence — intercepts dangerous commands like rm -rf, sudo, etc. -->
 
-## 3. submit_review — After Completing a SKILL Pipeline <!-- SKILL 流水线完成后必须自审 -->
+## 3. submit_review — After Completing a SKILL Pipeline
 
 After completing a task that uses a SKILL pipeline, call:
 ```
@@ -44,15 +43,15 @@ If it returns `P8_AUDIT_FAILED`:
   4. Repeat up to 3 times
   5. If still failing after 3 retries, inform the user with the violations
 
-<!-- 这是 Reviewer 的自审闭环，只在使用 SKILL 流水线时触发 -->
-<!-- 日常问答、解释代码、简单文件操作不需要调用 submit_review -->
+<!-- Reviewer self-audit loop — only triggered when using a SKILL pipeline -->
+<!-- Normal Q&A, code explanations, and simple file operations do not require submit_review -->
 
-## 4. Absolute Prohibitions <!-- 绝对禁止事项 -->
+## 4. Absolute Prohibitions
 
 - Do NOT skip `execute_tool` and run OS commands directly
 - Do NOT modify files under `skills/` unless the user explicitly asks
 - Do NOT modify `AGENTS.md`
 - Do NOT attempt to read `references/guidelines.yaml` or `references/security.yaml` directly — these are loaded internally by the P8 engine
 
-<!-- guidelines.yaml 和 security.yaml 是"警察"内部使用的，Agent 不可见 -->
-<!-- 如果 Agent 直接读取这些文件，就等于"罪犯看到了警察的部署计划" -->
+<!-- guidelines.yaml and security.yaml are internal to the "police" engine — invisible to Agents -->
+<!-- If an Agent reads these files directly, it defeats the purpose of hidden audit criteria -->

@@ -1,43 +1,41 @@
-# 输出模板 — Generator 必须严格遵循的输出模具
 # Output Template — The mold that the Generator MUST follow exactly
-# 每次生成的 PRD 都会按此结构输出，保证一致性和专业性。
 # Every generated PRD follows this structure for consistency and professionalism.
 
 template: |
   # Product Requirements Document
 
-  ## 1. Overview / 概述
-  [Brief product description and vision / 简要产品描述与愿景]
+  ## 1. Overview
+  [Brief product description and vision]
 
-  ## 2. Target Audience / 目标用户
-  [User personas and demographics / 用户画像与人口统计]
+  ## 2. Target Audience
+  [User personas and demographics]
 
-  ## 3. Problem Statement / 问题陈述
-  [What problem does this solve? / 解决什么问题？]
+  ## 3. Problem Statement
+  [What problem does this solve?]
 
-  ## 4. Core Features / 核心功能
-  ### 4.1 [Feature Name / 功能名称]
-  - **Description / 描述**: ...
-  - **User Story / 用户故事**: As a [user], I want [action] so that [benefit].
-  - **Priority / 优先级**: P0 / P1 / P2
-  - **Acceptance Criteria / 验收标准**: ...
+  ## 4. Core Features
+  ### 4.1 [Feature Name]
+  - **Description**: ...
+  - **User Story**: As a [user], I want [action] so that [benefit].
+  - **Priority**: P0 / P1 / P2
+  - **Acceptance Criteria**: ...
 
-  ## 5. Non-Functional Requirements / 非功能性需求
-  - Performance / 性能: ...
-  - Security / 安全: ...
-  - Scalability / 可扩展性: ...
+  ## 5. Non-Functional Requirements
+  - Performance: ...
+  - Security: ...
+  - Scalability: ...
 
-  ## 6. Success Metrics / 成功指标
-  | Metric / 指标 | Target / 目标 | Measurement Method / 度量方法 |
-  |--------|--------|--------------------|
-  | ...    | ...    | ...                |
+  ## 6. Success Metrics
+  | Metric | Target | Measurement Method |
+  |--------|--------|-------------------|
+  | ...    | ...    | ...               |
 
-  ## 7. Timeline & Milestones / 时间线与里程碑
-  | Phase / 阶段 | Duration / 工期 | Deliverables / 交付物 |
+  ## 7. Timeline & Milestones
+  | Phase | Duration | Deliverables |
   |-------|----------|-------------|
   | ...   | ...      | ...         |
 
-  ## 8. Risks & Mitigations / 风险与缓解
-  | Risk / 风险 | Impact / 影响 | Mitigation / 缓解措施 |
+  ## 8. Risks & Mitigations
+  | Risk | Impact | Mitigation |
   |------|--------|-----------|
   | ...  | ...    | ...       |
