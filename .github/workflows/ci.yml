@@ -33,5 +33,5 @@ jobs:
         run: |
           p8 --version
           p8 list
-          p8 validate skills/example
+          p8 validate skills/prd
           p8 validate skills/code_review
