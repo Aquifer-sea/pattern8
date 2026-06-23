@@ -9,7 +9,7 @@ description = "Pattern 8 (P8) — AI Agent Governance Framework"
 readme = "README.md"
 requires-python = ">=3.8"
 license = {text = "MIT"}
-keywords = ["ai", "agent", "governance", "framework", "skills", "pattern8"]
+keywords = ["ai", "agent", "governance", "framework", "skills", "pattern8", "quantum-safe", "audit"]
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Developers",
@@ -34,11 +34,15 @@ dependencies = [
 enforcement = [
     "mcp[cli]>=1.0.0",
 ]
+# Quantum-safe audit trails (ASQAV SDK for ML-DSA-65 signing)
+audit = [
+    "asqav-sdk>=1.0.0",
+]
 dev = [
     "pytest>=8.0",
 ]
 # Full install
-all = ["pattern8[enforcement,dev]"]
+all = ["pattern8[enforcement,audit,dev]"]
 
 # CLI entry point
 [project.scripts]
