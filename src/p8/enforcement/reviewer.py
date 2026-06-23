@@ -9,6 +9,9 @@ Check types:
   5. Contains     — Does the output contain required text?
 
 If any check fails, raises P8AuditError with detailed violation info.
+
+Optional: Quantum-safe audit trails via ASQAV SDK (ML-DSA-65, NIST FIPS 204).
+Install with: pip install pattern8[audit]
 """
 
 from __future__ import annotations
@@ -22,6 +25,87 @@ from typing import Any
 import yaml
 
 logger = logging.getLogger("p8.reviewer")
+
+
+# ════════════════════════════════════════════════════════════
+#  Quantum-Safe Audit Trail (ASQAV SDK integration)
+# ════════════════════════════════════════════════════════════
+
+class AuditTrailSigner:
+    """
+    Quantum-safe audit trail signer using ASQAV SDK (ML-DSA-65).
+    
+    Signs every audit result to create tamper-proof evidence.
+    Requires: pip install asqav-sdk
+    """
+    
+    def __init__(self, enabled: bool = False):
+        """
+        Args:
+            enabled: Whether to enable quantum-safe signing
+        """
+        self.enabled = enabled
+        self._signer = None
+        
+        if enabled:
+            try:
+                from asqav_sdk import Signer  # type: ignore
+                self._signer = Signer(algorithm="ML-DSA-65")
+                logger.info("Quantum-safe audit trail enabled (ML-DSA-65)")
+            except ImportError:
+                logger.warning("ASQAV SDK not installed. Install with: pip install asqav-sdk")
+                self.enabled = False
+    
+    def sign_audit_result(self, result: dict[str, Any]) -> dict[str, Any]:
+        """
+        Sign an audit result and return with signature.
+        
+        Args:
+            result: Audit result dict from Reviewer.audit()
+            
+        Returns:
+            Result dict with added 'signature' and 'signed_at' fields
+        """
+        if not self.enabled or not self._signer:
+            return result
+        
+        import hashlib
+        from datetime import datetime, timezone
+        
+        # Create canonical representation for signing
+        canonical = json.dumps(result, sort_keys=True, separators=(",", ":"))
+        content_hash = hashlib.sha256(canonical.encode()).hexdigest()
+        
+        # Sign the hash
+        signature = self._signer.sign(content_hash.encode())
+        
+        # Add signature metadata to result
+        result["signature"] = signature.hex()
+        result["signed_at"] = datetime.now(timezone.utc).isoformat()
+        result["algorithm"] = "ML-DSA-65"
+        result["content_hash"] = content_hash
+        
+        logger.debug("Audit result signed with ML-DSA-65")
+        
+        return result
+
+
+# Global signer instance (lazy initialization)
+_audit_signer: AuditTrailSigner | None = None
+
+
+def get_audit_signer() -> AuditTrailSigner:
+    """Get or create global audit trail signer."""
+    global _audit_signer
+    if _audit_signer is None:
+        _audit_signer = AuditTrailSigner(enabled=False)
+    return _audit_signer
+
+
+def enable_quantum_safe_signing() -> None:
+    """Enable quantum-safe audit trail signing."""
+    global _audit_signer
+    _audit_signer = AuditTrailSigner(enabled=True)
 
 
 # ════════════════════════════════════════════════════════════
@@ -140,6 +224,11 @@ class Reviewer:
 
         if not passed:
             raise P8AuditError(violations, score)
+
+        # Sign the result if quantum-safe audit trail is enabled
+        signer = get_audit_signer()
+        if signer.enabled:
+            result = signer.sign_audit_result(result)
 
         return result
 
